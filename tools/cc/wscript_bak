@@ -1,0 +1,42 @@
+# -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+top = '../..'
+
+def build(bld):
+
+    bld.objects(
+        target='qsccp-client-objects',
+        source=bld.path.ant_glob('client/*.cpp', excl='client/main.cpp'),
+        use='core-objects')
+
+    bld.program(
+        target='../../bin/qsccp-client',
+        name='qsccp-client',
+        source='client/main.cpp',
+        use='qsccp-client-objects')
+    
+    bld.objects(
+        target='pcon-client-objects',
+        source=bld.path.ant_glob('pcon/*.cpp', excl='pcon/pcon.cpp'),
+        use='core-objects')
+
+    bld.program(
+        target='../../bin/pcon-client',
+        name='pcon-client',
+        source='pcon/pcon.cpp',
+        use='pcon-client-objects')
+
+    bld.objects(
+        target='cc-server-objects',
+        source=bld.path.ant_glob('server/*.cpp', excl='server/main.cpp'),
+        use='core-objects')
+
+    bld.program(
+        target='../../bin/cc-producer',
+        name='cc-producer',
+        source='server/main.cpp',
+        use='cc-server-objects')
+
+    ## (for unit tests)
+
+    bld(target='cc-objects',
+        use='qsccp-client-objects cc-server-objects')

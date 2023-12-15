@@ -68,6 +68,7 @@
 #include <ndn-cxx/util/scheduler.hpp>
 #include <ndn-cxx/util/signal.hpp>
 #include <ndn-cxx/util/time.hpp>
+#include <iostream>
 
 namespace ndn {
 
